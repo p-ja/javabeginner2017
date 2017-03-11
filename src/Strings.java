@@ -1,7 +1,34 @@
 public class Strings {
     public static void main(String[] args) {
+
+        // Creating String
         String newString = new String("Lorem ipsum");
 
+        char[] loremArr = {'l', 'o', 'r', 'e', 'm', '.'};
+        String loremStr = new String(loremArr);
+        System.out.println(loremStr);
+
+        // String concatenation
+        String firstName = null;
+        String lastName = "Doe";
+        System.out.println("First Name plus Last Name = " + firstName + " " + lastName);
+
+        String fullName = firstName.concat(" ").concat(lastName);
+        System.out.println("Fullname = ".concat(fullName));
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("String Builder = ");
+        sb.append(firstName);
+        sb.append(" ");
+        sb.append(lastName);
+        System.out.println(sb.toString());
+
+        // String length
+        String lorem = "Lorem ipsum";
+        int length = lorem.length();
+        System.out.println(length);
+
+        // Comparing Strings
         final String secret = "s3cr3t";
 
         String userPassword = "letmein";
