@@ -31,7 +31,7 @@ public class SiiFrame extends JFrame {
     }
 
     private void buildContent() {
-        JPanel contentPane = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel contentPane = new JPanel(new GridLayout(0, 2));
 
         JTextField firstName = createTextField();
         JTextField lastName = createTextField();
