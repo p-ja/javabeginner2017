@@ -12,8 +12,6 @@ import java.awt.event.ActionListener;
  */
 public class SiiFrame extends JFrame {
 
-    private final Toolkit toolkit;
-
     private JLabel loginLabel;
     private JTextField login;
 
@@ -24,78 +22,35 @@ public class SiiFrame extends JFrame {
 
     public SiiFrame(String title) throws HeadlessException {
         super(title);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        toolkit = Toolkit.getDefaultToolkit();
-
         setDimensionAndPosition();
+
         buildContent();
     }
 
     private void setDimensionAndPosition() {
-        Dimension screenSize = toolkit.getScreenSize();
-//        int windowWidth = new Double(screenSize.getWidth() / 2).intValue();
-//        int windowHeight = new Double(screenSize.getHeight() / 2).intValue();
-        int windowWidth = 400;
-        int windowHeight = 200;
-        setMinimumSize(new Dimension(windowWidth, windowHeight));
-
+        setMinimumSize(new Dimension(400, 200));
         setLocationRelativeTo(null);
     }
 
     private void buildContent() {
-        //GridLayout layout = new GridLayout(0, 2);
-        GridBagLayout layout = new GridBagLayout();
-
         // Create components
-        loginLabel = new JLabel("Login");
-        login = new JTextField();
-        login.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateInput();
-            }
+        createComponents();
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateInput();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                validateInput();
-            }
-
-            private void validateInput() {
-                if (login.getText().length() <= 0) {
-                    okButton.setEnabled(false);
-                } else {
-                    okButton.setEnabled(true);
-                }
-            }
-        });
+        // Configure components
         configureField(login);
-
-        passwordLabel = new JLabel("Password");
-        password = new JPasswordField();
         configureField(password);
 
-        okButton = new JButton("OK");
-        okButton.setEnabled(false);
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new JDialog(SiiFrame.this, "Login Action", true);
-                dialog.setLocationRelativeTo(SiiFrame.this);
-                dialog.add(new Label("Hello " + login.getText()));
-                dialog.setMinimumSize(new Dimension(300, 200));
-                dialog.setVisible(true);
-            }
-        });
+        // Place components
+        placeComponents();
+    }
 
+    private void placeComponents() {
         // Create panel
+        GridBagLayout layout = new GridBagLayout();
         JPanel contentPane = new JPanel(layout);
-        contentPane.setBackground(new Color(255, 255, 196));
+        contentPane.setBackground(new Color(196, 196, 255));
         contentPane.setPreferredSize(new Dimension(300, 100));
 
         // Add components
@@ -121,6 +76,68 @@ public class SiiFrame extends JFrame {
         layout.setConstraints(okButton, c);
 
         getRootPane().setContentPane(contentPane);
+    }
+
+    private void createComponents() {
+        // Login label
+        loginLabel = new JLabel("Login");
+
+        // Login field
+        login = createLoginField();
+
+        // Password label
+        passwordLabel = new JLabel("Password");
+
+        // Password field
+        password = new JPasswordField();
+
+        // OK button
+        okButton = createOkButton();
+    }
+
+    private JButton createOkButton() {
+        JButton button = new JButton("OK");
+        button.setEnabled(false);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new JDialog(SiiFrame.this, "Login Action", true);
+                dialog.setLocationRelativeTo(SiiFrame.this);
+                dialog.add(new Label("Hello " + login.getText()));
+                dialog.setMinimumSize(new Dimension(300, 200));
+                dialog.setVisible(true);
+            }
+        });
+        return button;
+    }
+
+    private JTextField createLoginField() {
+        JTextField field = new JTextField();
+        field.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateInput();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateInput();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                validateInput();
+            }
+        });
+        return field;
+    }
+
+    private void validateInput() {
+        if (login.getText().length() <= 0) {
+            okButton.setEnabled(false);
+        } else {
+            okButton.setEnabled(true);
+        }
     }
 
     private void configureField(Component field) {
