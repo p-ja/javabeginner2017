@@ -7,5 +7,12 @@ public class Sandbox {
         c++;
 
         System.out.println(c);
+
+        byte bitB = ((byte) 6) & 2;
+        System.out.println(bitB);
+
+        bitB <<= 2;
+        System.out.println(bitB);
+
     }
 }
