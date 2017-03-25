@@ -19,5 +19,9 @@ public class FloatTest {
 
         BigDecimal totalBD = BigDecimal.ZERO.add(new BigDecimal("9.99")).add(new BigDecimal("1.99")).add(new BigDecimal("0.99"));
         System.out.println(totalBD);
+
+        float f = (1 / 4) * 10;
+        int i = Math.round(f);
+        System.out.println(i);
     }
 }

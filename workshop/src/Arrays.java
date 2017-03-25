@@ -9,6 +9,9 @@ public class Arrays {
     private static final Logger LOGGER = LogManager.getLogger(Arrays.class);
 
     public static void main(String[] args) {
+
+        System.out.println(args.length);
+
         int[] intArr = new int[] {1, 2, 3};
         LOGGER.info(intArr[2]);
 

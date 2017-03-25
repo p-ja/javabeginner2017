@@ -4,6 +4,15 @@ import oop.inheritance.Square;
 public class Sandbox {
 
     public static void main(String[] args) {
+
+        String text = "Lorem ipsum";
+        final String textF = "Final countdown";
+
+
+        text = "dolor sit amet";
+
+
+
         float a = 1.0f;
         float b = 2.0f;
 
@@ -25,6 +34,10 @@ public class Sandbox {
         Square square = new Square(3);
         System.out.println(square.area());
 
+
+        float f = (1 / 4) * 10;
+        int i = Math.round(f);
+        System.out.println(i);
     }
 
 }
